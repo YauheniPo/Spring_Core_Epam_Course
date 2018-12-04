@@ -1,9 +1,5 @@
 package ua.epam.spring.hometask.dao.impl;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import ua.epam.spring.hometask.dao.BookingDao;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
@@ -14,9 +10,6 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Setter @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class BookingDaoImpl implements BookingDao {
 
     private Set<Ticket> purchasedTickets;

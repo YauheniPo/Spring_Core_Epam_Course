@@ -1,8 +1,6 @@
 package ua.epam.spring.hometask.dao.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
@@ -10,9 +8,7 @@ import ua.epam.spring.hometask.domain.User;
 import java.util.Collection;
 import java.util.Set;
 
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter @Getter
 public class UserDaoImpl implements UserDao {
 
     private Set<User> users;

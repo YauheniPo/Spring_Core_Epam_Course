@@ -8,14 +8,14 @@ import java.util.*;
 
 @EqualsAndHashCode(callSuper=false)
 @Getter @Setter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Event extends DomainObject {
 
-    private String name;
+    @NonNull private String name;
+    @NonNull private double basePrice;
+    @NonNull private EventRating rating;
     private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
-    private double basePrice;
-    private EventRating rating;
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
 
     /**

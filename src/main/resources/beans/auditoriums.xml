@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="auditorium1" class="ua.epam.spring.hometask.domain.Auditorium" c:name="${auditorium1.name}"
+    <bean id="auditorium_1" class="ua.epam.spring.hometask.domain.Auditorium" c:name="${auditorium1.name}"
           c:numberOfSeats="${auditorium1.numberOfSeats}">
         <constructor-arg>
                 <value type="java.lang.String[]">${auditorium1.vipSeats}</value>
         </constructor-arg>
     </bean>
 
-    <bean id="auditorium2" class="ua.epam.spring.hometask.domain.Auditorium" c:name="${auditorium2.name}"
+    <bean id="auditorium_2" class="ua.epam.spring.hometask.domain.Auditorium" c:name="${auditorium2.name}"
           c:numberOfSeats="${auditorium2.numberOfSeats}">
         <constructor-arg>
             <value type="java.lang.String[]">${auditorium2.vipSeats}</value>
@@ -25,8 +23,8 @@
     <bean id="auditoriumDaoImpl" class="ua.epam.spring.hometask.dao.impl.AuditoriumDaoImpl">
         <property name="auditoriums">
             <set>
-                <ref bean="auditorium1"/>
-                <ref bean="auditorium2"/>
+                <ref bean="auditorium_1"/>
+                <ref bean="auditorium_2"/>
             </set>
         </property>
     </bean>

@@ -21,9 +21,7 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public void remove(Event event) {
-        if (events.contains(event)) {
-            events.remove(event);
-        }
+        events.remove(event);
     }
 
     @Override

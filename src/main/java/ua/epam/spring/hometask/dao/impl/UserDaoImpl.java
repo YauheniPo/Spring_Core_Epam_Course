@@ -31,9 +31,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void remove(User user) {
-        if (users.contains(user)) {
-            users.remove(user);
-        }
+        users.remove(user);
     }
 
     @Override

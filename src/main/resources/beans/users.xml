@@ -7,7 +7,11 @@
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <bean id="user" class="ua.epam.spring.hometask.domain.User" c:firstName="${user.firstName}"
-          c:lastName="${user.lastName}" c:email="${user.email}" scope="prototype"/>
+          c:lastName="${user.lastName}" c:email="${user.email}" scope="prototype">
+        <property name="birthday">
+            <value>#{T(java.time.LocalDate).parse('${user.birthday}', T(java.time.format.DateTimeFormatter).ofPattern('yyyy-MM-dd')).atStartOfDay()}</value>
+        </property>
+    </bean>
 
     <bean id="userDaoImpl" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" scope="prototype">
         <property name="users">

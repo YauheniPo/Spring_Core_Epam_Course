@@ -15,6 +15,7 @@ import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.service.DiscountService;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -41,6 +42,9 @@ public class App implements ApplicationListener {
     @Resource(name = "eventDaoImpl")
     private EventDao eventDao;
 
+    @Resource(name = "discountServiceImpl")
+    private DiscountService discountService;
+
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
@@ -64,7 +68,6 @@ public class App implements ApplicationListener {
                 new HashSet<>(Arrays.asList(ticket1.getSeat(), ticket2.getSeat())));
 
         user.addTicket(ticket1, ticket2, ticket3, ticket4);
-
 
         ctx.close();
     }

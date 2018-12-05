@@ -35,7 +35,7 @@ public class TestBooking extends BaseTest {
         final String EVENT_NAME = "Rambo";
         final String AUDITORIUM1_NAME = "Auditorium1";
         final String AUDITORIUM2_NAME = "Auditorium2";
-        final String AIR_DATE_EVENT = "2016-10-08T00:00";
+        final String AIR_DATE_EVENT = "2016-10-08T40:00";
 
         Event event = eventDao.getByName(EVENT_NAME);
         LocalDateTime airDate = LocalDateTime.parse(AIR_DATE_EVENT);

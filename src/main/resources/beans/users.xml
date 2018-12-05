@@ -7,9 +7,9 @@
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <bean id="user" class="ua.epam.spring.hometask.domain.User" c:firstName="${user.firstName}"
-          c:lastName="${user.lastName}" c:email="${user.email}"/>
+          c:lastName="${user.lastName}" c:email="${user.email}" scope="prototype"/>
 
-    <bean id="userDaoImpl" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl">
+    <bean id="userDaoImpl" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" scope="prototype">
         <property name="users">
             <set>
                 <ref bean="user"/>

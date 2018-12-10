@@ -9,7 +9,7 @@
     <bean id="auditorium_1" class="ua.epam.spring.hometask.domain.Auditorium" c:name="${auditorium1.name}"
           c:numberOfSeats="${auditorium1.numberOfSeats}" scope="prototype">
         <constructor-arg>
-                <value type="java.lang.String[]">${auditorium1.vipSeats}</value>
+            <value type="java.lang.String[]">${auditorium1.vipSeats}</value>
         </constructor-arg>
     </bean>
 

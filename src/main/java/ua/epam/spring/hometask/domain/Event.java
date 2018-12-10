@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode
 @Getter @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor

@@ -15,7 +15,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>3.2.16.RELEASE</spring.version>
         <findbugs.version>3.0.1</findbugs.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.9</junit.version>
         <lombok.version>1.18.2</lombok.version>
         <log4j.version>2.11.1</log4j.version>
     </properties>
@@ -155,6 +155,12 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.1</version>
         </dependency>
     </dependencies>
 

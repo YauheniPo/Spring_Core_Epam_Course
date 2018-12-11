@@ -5,14 +5,18 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import ua.epam.spring.hometask.BaseTest;
+import ua.epam.spring.hometask.aspects.DiscountAspect;
 import ua.epam.spring.hometask.dao.AuditoriumDao;
 import ua.epam.spring.hometask.dao.EventDao;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.service.DiscountService;
+import ua.epam.spring.hometask.service.impl.strategy.BirthDayDiscount;
+import ua.epam.spring.hometask.service.impl.strategy.RegularCustomerDiscount;
 
 import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestDiscount extends BaseTest {
 
@@ -31,6 +35,9 @@ public class TestDiscount extends BaseTest {
     @Autowired
     @Qualifier("discountServiceImpl")
     private DiscountService discountService;
+
+    @Autowired
+    private DiscountAspect discountAspect;
 
     private User user;
     private Event event;
@@ -60,6 +67,13 @@ public class TestDiscount extends BaseTest {
         byte discount = discountService.getDiscount(user, event, ticket.getDateTime(), 1);
 
         assertEquals(discount, 5);
+
+        discount = discountService.getDiscount(user, event, ticket.getDateTime(), 11);
+
+        assertEquals(discount, 10);
+
+        assertEquals(1, (int) discountAspect.getCounter().get(user).get(new BirthDayDiscount()));
+        assertTrue(discountAspect.getCounter().get(user).get(new RegularCustomerDiscount()) > 0);
     }
 
     @Test

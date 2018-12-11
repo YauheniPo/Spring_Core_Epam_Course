@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@EqualsAndHashCode
 @Getter @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -120,5 +119,22 @@ public class Event extends DomainObject {
     public boolean airsOnDates(LocalDate from, LocalDate to) {
         return airDates.stream()
                 .anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Double.compare(event.basePrice, basePrice) == 0 &&
+                Objects.equals(name, event.name) &&
+                rating == event.rating &&
+                Objects.equals(airDates, event.airDates) &&
+                Objects.equals(auditoriums, event.auditoriums);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, basePrice, rating);
     }
 }

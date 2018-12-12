@@ -22,7 +22,7 @@ public interface BookingDao {
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user,
+    double getTicketsPrice(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime dateTime,
                            @Nonnull Set<Long> seats);
 
     /**
@@ -36,10 +36,11 @@ public interface BookingDao {
     /**
      * Getting all purchased tickets for event on specific air date and time
      *
+     * @param user     User
      * @param event    Event to get tickets for
      * @param dateTime Date and time of airing of event
      * @return set of all purchased tickets
      */
     @Nonnull
-    Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event, @Nonnull LocalDateTime dateTime);
+    Set<Ticket> getPurchasedTicketsForEvent(@Nonnull User user, @Nonnull Event event, @Nonnull LocalDateTime dateTime);
 }

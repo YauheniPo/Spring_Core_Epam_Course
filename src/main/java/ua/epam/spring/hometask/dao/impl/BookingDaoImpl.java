@@ -8,16 +8,17 @@ import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 public class BookingDaoImpl implements BookingDao {
 
-    private Set<Ticket> purchasedTickets;
+    private Set<Ticket> purchasedTickets = new HashSet<>();
 
     @Override
-    public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats) {
+    public double getTicketsPrice(User user, Event event, LocalDateTime dateTime, Set<Long> seats) {
         Auditorium auditorium = event.getAuditoriums().get(dateTime);
         long vipSeatsCount = auditorium.countVipSeats(seats);
         long regSeats = seats.size() - vipSeatsCount;
@@ -27,16 +28,14 @@ public class BookingDaoImpl implements BookingDao {
 
     @Override
     public void bookTickets(Set<Ticket> tickets) {
-        tickets.forEach(ticket -> {
-            if (ticket.getEvent().equals(purchasedTickets.iterator().next().getEvent())) {
-                purchasedTickets.add(ticket);
-            }
-        });
+        purchasedTickets.addAll(tickets);
     }
 
     @Override
-    public Set<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
-        return purchasedTickets.stream()
+    public Set<Ticket> getPurchasedTicketsForEvent(User user, Event event, LocalDateTime dateTime) {
+        Set<Ticket> ticketSet = purchasedTickets.stream()
+                .filter(ticket -> ticket.getUser().equals(user)).collect(Collectors.toSet());
+        return ticketSet.stream()
                 .filter(ticket -> ticket.getEvent().equals(event) && ticket.getDateTime().equals(dateTime))
                 .collect(Collectors.toSet());
     }

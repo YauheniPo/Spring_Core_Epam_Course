@@ -64,7 +64,7 @@ public class App implements ApplicationListener {
         Ticket ticket3 = new Ticket(user, event, event.getAirDates().last(), 1);
         Ticket ticket4 = new Ticket(user, event, event.getAirDates().last(), 2);
 
-        double ticketsPrice = new BookingDaoImpl().getTicketsPrice(event, event.getAirDates().first(), user,
+        double ticketsPrice = new BookingDaoImpl().getTicketsPrice(user, event, event.getAirDates().first(),
                 new HashSet<>(Arrays.asList(ticket1.getSeat(), ticket2.getSeat())));
 
         user.addTicket(ticket1, ticket2, ticket3, ticket4);

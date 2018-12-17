@@ -1,12 +1,13 @@
 package ua.epam.spring.hometask;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+import ua.epam.spring.hometask.config.AppConfig;
 import ua.epam.spring.hometask.dao.AuditoriumDao;
 import ua.epam.spring.hometask.dao.EventDao;
 import ua.epam.spring.hometask.dao.UserDao;
@@ -46,9 +47,9 @@ public class App implements ApplicationListener {
     private DiscountService discountService;
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-
-        App app = ctx.getBean("app", App.class);
+//        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        ApplicationContext actx = new AnnotationConfigApplicationContext(AppConfig.class);
+        App app = actx.getBean("app", App.class);
 
         Event event = app.eventDao.getByName(EVENT_NAME);
         LocalDateTime airDate = LocalDateTime.parse(AIR_DATE_EVENT);
@@ -68,8 +69,6 @@ public class App implements ApplicationListener {
                 new HashSet<>(Arrays.asList(ticket1.getSeat(), ticket2.getSeat())));
 
         user.addTicket(ticket1, ticket2, ticket3, ticket4);
-
-        ctx.close();
     }
 
     @Override

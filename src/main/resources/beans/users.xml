@@ -13,7 +13,7 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <!--<bean id="userDaoImpl" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" scope="prototype">-->
+    <!--<bean id="userDao" class="ua.epam.spring.hometask.dao.impl.UserDaoImpl" scope="prototype">-->
         <!--<property name="users">-->
             <!--<set>-->
                 <!--<ref bean="user"/>-->

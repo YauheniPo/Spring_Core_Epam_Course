@@ -10,8 +10,8 @@ import ua.epam.spring.hometask.dao.AuditoriumDao;
 import ua.epam.spring.hometask.dao.EventDao;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.service.DiscountService;
-import ua.epam.spring.hometask.service.impl.strategy.BirthDayDiscount;
-import ua.epam.spring.hometask.service.impl.strategy.RegularCustomerDiscount;
+import ua.epam.spring.hometask.service.impl.strategy.discount.BirthDayDiscount;
+import ua.epam.spring.hometask.service.impl.strategy.discount.RegularCustomerDiscount;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +25,7 @@ public class TestDiscount extends BaseTest {
     private AuditoriumDao auditoriumsDao;
 
     @Autowired
-    @Qualifier("userDaoImpl")
+    @Qualifier("userDao")
     private UserDao userDao;
 
     @Autowired

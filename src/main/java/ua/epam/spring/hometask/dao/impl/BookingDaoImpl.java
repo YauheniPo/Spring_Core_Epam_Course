@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.dao.BookingDao;
 import ua.epam.spring.hometask.domain.Auditorium;
@@ -14,6 +16,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class BookingDaoImpl implements BookingDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     private Set<Ticket> purchasedTickets = new HashSet<>();
 

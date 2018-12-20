@@ -1,31 +1,29 @@
 package ua.epam.spring.hometask;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.config.AppConfig;
-import ua.epam.spring.hometask.dao.AuditoriumDao;
-import ua.epam.spring.hometask.dao.EventDao;
-import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.dao.impl.BookingDaoImpl;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
-import ua.epam.spring.hometask.service.DiscountService;
+import ua.epam.spring.hometask.service.impl.AuditoriumServiceImpl;
+import ua.epam.spring.hometask.service.impl.BookingServiceImpl;
+import ua.epam.spring.hometask.service.impl.EventServiceImpl;
+import ua.epam.spring.hometask.service.impl.UserServiceImpl;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 
 @Log4j2
 @Component
-@Scope
 public class App implements ApplicationListener {
 
     private static final String USER_EMAIL = "lucy@epam.com";
@@ -34,31 +32,31 @@ public class App implements ApplicationListener {
     private static final String AUDITORIUM2_NAME = "Auditorium2";
     private static final String AIR_DATE_EVENT = "2016-10-08T00:00";
 
-    @Resource(name = "auditoriumDaoImpl")
-    private AuditoriumDao auditoriumsDao;
+    @Autowired
+    private BookingServiceImpl bookingService;
 
-    @Resource(name = "userDaoImpl")
-    private UserDao userDao;
+    @Autowired
+    private EventServiceImpl eventService;
 
-    @Resource(name = "eventDaoImpl")
-    private EventDao eventDao;
+    @Autowired
+    private UserServiceImpl userService;
 
-    @Resource(name = "discountServiceImpl")
-    private DiscountService discountService;
+    @Autowired
+    private AuditoriumServiceImpl auditoriumService;
 
     public static void main(String[] args) {
 //        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         ApplicationContext actx = new AnnotationConfigApplicationContext(AppConfig.class);
         App app = actx.getBean("app", App.class);
 
-        Event event = app.eventDao.getByName(EVENT_NAME);
+        Event event = app.eventService.getByName(EVENT_NAME);
         LocalDateTime airDate = LocalDateTime.parse(AIR_DATE_EVENT);
-        Auditorium auditorium1 = app.auditoriumsDao.getByName(AUDITORIUM1_NAME);
-        Auditorium auditorium2 = app.auditoriumsDao.getByName(AUDITORIUM2_NAME);
+        Auditorium auditorium1 = app.auditoriumService.getByName(AUDITORIUM1_NAME);
+        Auditorium auditorium2 = app.auditoriumService.getByName(AUDITORIUM2_NAME);
         event.addAirDateTime(airDate, auditorium1);
         event.addAirDateTime(airDate.plusDays(1), auditorium2);
 
-        User user = app.userDao.getUserByEmail(USER_EMAIL);
+        User user = app.userService.getUserByEmail(USER_EMAIL);
 
         Ticket ticket1 = new Ticket(user, event, event.getAirDates().first(), 1);
         Ticket ticket2 = new Ticket(user, event, event.getAirDates().first(), 2);

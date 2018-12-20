@@ -13,7 +13,7 @@ import ua.epam.spring.hometask.dao.UserDao;
 public class UserTest extends BaseTest {
 
     @Autowired
-    @Qualifier("userDaoImpl")
+    @Qualifier("userDao")
     private UserDao userDao;
 
     @Autowired

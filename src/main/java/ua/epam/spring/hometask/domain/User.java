@@ -16,6 +16,7 @@ import java.util.TreeSet;
 @Scope("prototype")
 public class User extends DomainObject {
 
+    @NonNull private Long id;
     @Value("${user.firstName}")
     @NonNull private String firstName;
     @Value("${user.lastName}")

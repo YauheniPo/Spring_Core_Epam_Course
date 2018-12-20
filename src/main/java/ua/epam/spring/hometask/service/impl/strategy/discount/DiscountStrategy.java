@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.service.impl.strategy;
+package ua.epam.spring.hometask.service.impl.strategy.discount;
 
 import ua.epam.spring.hometask.domain.User;
 

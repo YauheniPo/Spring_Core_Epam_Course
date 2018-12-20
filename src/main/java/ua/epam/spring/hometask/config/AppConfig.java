@@ -46,8 +46,8 @@ public class AppConfig {
     @Autowired
     private User user;
 
-    @Bean(name = "userDaoImpl")
-    public UserDao getUserDaoImpl() {
+    @Bean(name = "userDao")
+    public UserDao getUserDao() {
         return new UserDaoImpl(new HashSet(){{add(user);}});
     }
 }

@@ -2,6 +2,8 @@ package ua.epam.spring.hometask.dao.impl;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import ua.epam.spring.hometask.dao.EventDao;
 import ua.epam.spring.hometask.domain.Event;
 
@@ -10,6 +12,9 @@ import java.util.Set;
 
 @Setter @Getter
 public class EventDaoImpl implements EventDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     private Set<Event> events;
 

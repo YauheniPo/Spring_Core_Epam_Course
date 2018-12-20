@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -39,23 +40,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User save(User user) {
-        KeyHolder key = new GeneratedKeyHolder();
+        KeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
-            final PreparedStatement ps = connection.prepareStatement("insert into users (firstname, lastname, email, birthday) values (?, ?, ?, ?)",
+            final PreparedStatement ps = connection.prepareStatement(
+                    "insert into users (firstname, lastname, email, birthday) values (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getEmail());
             ps.setTimestamp(4, Timestamp.valueOf(user.getBirthday().toLocalDate().atStartOfDay()));
             return ps;
-        }, key);
-
+        }, holder);
+        user.setId(Long.parseLong(String.valueOf(holder.getKeyList().get(0).get("id"))));
         users.add(user);
         return user;
     }
 
     @Override
     public void remove(User user) {
+        jdbcTemplate.update("delete from users where id = ?", user.getId());
         users.remove(user);
     }
 
@@ -71,7 +74,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Collection<User> getAll() {
-        return users;
+        return jdbcTemplate.query("select * from users", new BeanPropertyRowMapper(User.class));
     }
 
     @PostConstruct

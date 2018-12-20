@@ -6,9 +6,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.domain.User;
-import ua.epam.spring.hometask.service.impl.strategy.BirthDayDiscount;
-import ua.epam.spring.hometask.service.impl.strategy.DiscountStrategy;
-import ua.epam.spring.hometask.service.impl.strategy.RegularCustomerDiscount;
+import ua.epam.spring.hometask.service.impl.strategy.discount.BirthDayDiscount;
+import ua.epam.spring.hometask.service.impl.strategy.discount.DiscountStrategy;
+import ua.epam.spring.hometask.service.impl.strategy.discount.RegularCustomerDiscount;
 
 import java.util.HashMap;
 import java.util.Map;

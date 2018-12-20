@@ -1,15 +1,17 @@
 package ua.epam.spring.hometask.service.impl;
 
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.DiscountService;
-import ua.epam.spring.hometask.service.impl.strategy.DiscountStrategy;
+import ua.epam.spring.hometask.service.impl.strategy.discount.DiscountStrategy;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Setter
+@Component
 public class DiscountServiceImpl implements DiscountService {
 
 	private List<DiscountStrategy> discountStrategies;

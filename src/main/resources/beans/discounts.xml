@@ -8,8 +8,8 @@
     <bean id="discountServiceImpl" class="ua.epam.spring.hometask.service.impl.DiscountServiceImpl">
         <property name="discountStrategies">
             <set>
-                <bean class="ua.epam.spring.hometask.service.impl.strategy.BirthDayDiscount" />
-                <bean class="ua.epam.spring.hometask.service.impl.strategy.RegularCustomerDiscount" />
+                <bean class="ua.epam.spring.hometask.service.impl.strategy.discount.BirthDayDiscount" />
+                <bean class="ua.epam.spring.hometask.service.impl.strategy.discount.RegularCustomerDiscount" />
             </set>
         </property>
     </bean>

@@ -29,7 +29,7 @@ public class TestBooking extends BaseTest {
     private AuditoriumDao auditoriumsDao;
 
     @Autowired
-    @Qualifier("userDaoImpl")
+    @Qualifier("userDao")
     private UserDao userDao;
 
     @Autowired

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.dao.BookingDao;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
-import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.BookingService;
 import ua.epam.spring.hometask.service.DiscountService;
 import ua.epam.spring.hometask.service.EventService;
@@ -31,9 +30,8 @@ public class BookingServiceImpl implements BookingService {
 	private EventService eventService;
 
 	@Override
-	public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats) {
-
-		return 0;
+	public double getTicketsPrice(Event event, LocalDateTime dateTime, Set<Long> seats) {
+		return bookingDao.getTicketsPrice(event, dateTime, seats);
 	}
 
 	@Override

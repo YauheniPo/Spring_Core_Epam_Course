@@ -5,7 +5,6 @@ import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -17,13 +16,10 @@ public interface BookingDao {
      * @param event    Event to get base ticket price, vip seats and other
      *                 information
      * @param dateTime Date and time of event air
-     * @param user     User that buys ticket could be needed to calculate discount.
-     *                 Can be <code>null</code>
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    double getTicketsPrice(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime dateTime,
-                           @Nonnull Set<Long> seats);
+    double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nonnull Set<Long> seats);
 
     /**
      * Books tickets in internal system. If user is not

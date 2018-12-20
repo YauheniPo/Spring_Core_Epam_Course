@@ -64,7 +64,7 @@ public class TestBooking extends BaseTest {
         Ticket ticket1 = new Ticket(user, event, event.getAirDates().first(), 1);
         Ticket ticket2 = new Ticket(user, event, event.getAirDates().first(), 2);
 
-        double ticketsPrice = bookingDao.getTicketsPrice(user, event, event.getAirDates().first(),
+        double ticketsPrice = bookingDao.getTicketsPrice(event, event.getAirDates().first(),
                 new HashSet<>(Arrays.asList(ticket1.getSeat(), ticket2.getSeat())));
 
         assertEquals(8.0, ticketsPrice, 0);
@@ -99,7 +99,7 @@ public class TestBooking extends BaseTest {
 
         assertTrue(bookingDao.getPurchasedTicketsForEvent(user, event, airDate).contains(ticket));
 
-        double ticketsPrice = bookingDao.getTicketsPrice(user, event, event.getAirDates().first(),
+        double ticketsPrice = bookingDao.getTicketsPrice(event, event.getAirDates().first(),
                 new HashSet<>(Collections.singletonList(ticket.getSeat())));
 
         assertTrue(ticketsPrice >= 0);

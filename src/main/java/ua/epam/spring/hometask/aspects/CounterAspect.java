@@ -41,8 +41,8 @@ public class CounterAspect {
         }
     }
 
-    @Before(value = "pointcutGettingTicketsPrice() && args(user,event,..)")
-    private void countGettingTicketsPrice(Object user, Object event) {
+    @Before(value = "pointcutGettingTicketsPrice() && args(event,..)")
+    private void countGettingTicketsPrice(Object event) {
         if (event != null) {
             if (!counter.containsKey(event)) {
                 counter.put((Event) event, new CounterModel());

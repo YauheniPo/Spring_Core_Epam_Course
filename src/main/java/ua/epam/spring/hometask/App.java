@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.config.AppConfig;
-import ua.epam.spring.hometask.dao.impl.BookingDaoImpl;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
@@ -45,7 +44,6 @@ public class App implements ApplicationListener {
     private AuditoriumServiceImpl auditoriumService;
 
     public static void main(String[] args) {
-//        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         ApplicationContext actx = new AnnotationConfigApplicationContext(AppConfig.class);
         App app = actx.getBean("app", App.class);
 
@@ -63,7 +61,7 @@ public class App implements ApplicationListener {
         Ticket ticket3 = new Ticket(user, event, event.getAirDates().last(), 1);
         Ticket ticket4 = new Ticket(user, event, event.getAirDates().last(), 2);
 
-        double ticketsPrice = new BookingDaoImpl().getTicketsPrice(user, event, event.getAirDates().first(),
+        double ticketsPrice = app.bookingService.getTicketsPrice(event, event.getAirDates().first(),
                 new HashSet<>(Arrays.asList(ticket1.getSeat(), ticket2.getSeat())));
 
         user.addTicket(ticket1, ticket2, ticket3, ticket4);

@@ -23,7 +23,7 @@ public class BookingDaoImpl implements BookingDao {
     private Set<Ticket> purchasedTickets = new HashSet<>();
 
     @Override
-    public double getTicketsPrice(User user, Event event, LocalDateTime dateTime, Set<Long> seats) {
+    public double getTicketsPrice(Event event, LocalDateTime dateTime, Set<Long> seats) {
         Auditorium auditorium = event.getAuditoriums().get(dateTime);
         long vipSeatsCount = auditorium.countVipSeats(seats);
         long regSeats = seats.size() - vipSeatsCount;

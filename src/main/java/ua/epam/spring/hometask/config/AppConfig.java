@@ -3,14 +3,21 @@ package ua.epam.spring.hometask.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.EncodedResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.dao.impl.UserDaoImpl;
 import ua.epam.spring.hometask.domain.User;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Objects;
 
 @Configuration
 @PropertySources({
@@ -28,9 +35,22 @@ public class AppConfig {
     @Value("${db.password}")
     private String password;
 
-    @Bean
     public DataSource dataSource() {
-        return new DriverManagerDataSource(url, username, password);
+        final DataSource datasource = new DriverManagerDataSource(url, username, password);
+        Connection connection = null;
+        try {
+            connection = datasource.getConnection();
+            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/table_users.sql"), StandardCharsets.UTF_8));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                Objects.requireNonNull(connection).close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return datasource;
     }
 
     @Bean
@@ -49,5 +69,10 @@ public class AppConfig {
     @Bean(name = "userDao")
     public UserDao getUserDao() {
         return new UserDaoImpl(new HashSet(){{add(user);}});
+    }
+
+    @Bean
+    public DbInitialization dbInitialization() {
+        return new DbInitialization();
     }
 }

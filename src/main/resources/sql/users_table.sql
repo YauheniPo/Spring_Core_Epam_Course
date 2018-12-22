@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS public.users
     firstname text COLLATE pg_catalog."default" NOT NULL,
     lastname text COLLATE pg_catalog."default" NOT NULL,
     email text COLLATE pg_catalog."default" NOT NULL,
-    birthday date
+    birthday date,
+    CONSTRAINT users_email_key UNIQUE (email)
 );

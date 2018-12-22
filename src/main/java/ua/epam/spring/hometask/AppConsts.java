@@ -7,4 +7,6 @@ public class AppConsts {
 
     public final static int REGULAR_DISCOUNT_TICKETS_TO_GET = 10;
     public final static byte REGULAR_DISCOUNT = 10;
+
+    public final static String QUERY_RESOURCE = "sql/query.properties";
 }

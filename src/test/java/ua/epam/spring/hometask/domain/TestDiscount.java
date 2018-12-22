@@ -45,7 +45,7 @@ public class TestDiscount extends BaseTest {
 
     @Before
     public void before() {
-        final String USER_EMAIL = "lucy@epam.com";
+        final String USER_EMAIL = "admin@epam.com";
         final String EVENT_NAME = "Rambo";
         final String AUDITORIUM1_NAME = "Auditorium1";
         final String AIR_DATE_EVENT = "2016-09-14T14:00";

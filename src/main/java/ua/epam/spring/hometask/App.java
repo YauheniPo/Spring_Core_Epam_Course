@@ -25,7 +25,7 @@ import java.util.HashSet;
 @Component
 public class App implements ApplicationListener {
 
-    private static final String USER_EMAIL = "lucy@epam.com";
+    private static final String USER_EMAIL = "admin@epam.com";
     private static final String EVENT_NAME = "Rambo";
     private static final String AUDITORIUM1_NAME = "Auditorium1";
     private static final String AUDITORIUM2_NAME = "Auditorium2";

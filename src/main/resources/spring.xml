@@ -12,7 +12,6 @@
         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
     <import resource="beans/auditoriums.xml"/>
-    <import resource="beans/users.xml"/>
     <import resource="beans/events.xml"/>
     <import resource="beans/discounts.xml"/>
 

@@ -47,7 +47,7 @@ public class TestBooking extends BaseTest {
 
     @Test
     public void testPrice() {
-        final String USER_EMAIL = "lucy@epam.com";
+        final String USER_EMAIL = "admin@epam.com";
         final String AUDITORIUM1_NAME = "Auditorium1";
         final String AUDITORIUM2_NAME = "Auditorium2";
         final String AIR_DATE_EVENT = "2016-10-08T14:00";
@@ -82,7 +82,7 @@ public class TestBooking extends BaseTest {
 
     @Test
     public void testLuckyWinner() {
-        final String USER_EMAIL = "lucy@epam.com";
+        final String USER_EMAIL = "admin@epam.com";
         final String AUDITORIUM1_NAME = "Auditorium1";
         final String AIR_DATE_EVENT = "2016-10-08T14:00";
 

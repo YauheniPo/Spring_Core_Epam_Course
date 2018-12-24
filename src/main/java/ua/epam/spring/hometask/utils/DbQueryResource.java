@@ -17,4 +17,9 @@ public interface DbQueryResource extends Config {
     String usersDelete();
 
     String usersSave();
+
+    String auditoriumsGetByName();
+
+    String auditoriumsGetAll();
+
 }

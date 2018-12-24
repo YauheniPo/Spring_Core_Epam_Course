@@ -30,6 +30,7 @@ class DbInitialization {
         try {
             connection = Objects.requireNonNull(datasource).getConnection();
             ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/users_table.sql"), StandardCharsets.UTF_8));
+            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/auditoriums_table.sql"), StandardCharsets.UTF_8));
         } catch (SQLException e) {
             log.error(e);
         } finally {
@@ -49,6 +50,7 @@ class DbInitialization {
         try {
             connection = Objects.requireNonNull(datasource).getConnection();
             ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/users_data.sql"), StandardCharsets.UTF_8));
+            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/auditoriums_data.sql"), StandardCharsets.UTF_8));
         } catch (SQLException | ScriptStatementFailedException e) {
             log.error(e);
         } finally {

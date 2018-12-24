@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.aeonbits.owner.ConfigFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -21,7 +20,6 @@ import java.util.Collection;
 @Setter @Getter
 @RequiredArgsConstructor
 @Component
-@Scope("prototype")
 public class UserDaoImpl implements UserDao {
 
     private DbQueryResource dbQueryResource = ConfigFactory.create(DbQueryResource.class);

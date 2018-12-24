@@ -2,6 +2,7 @@ package ua.epam.spring.hometask.domain;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;

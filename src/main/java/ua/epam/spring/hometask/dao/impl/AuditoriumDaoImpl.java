@@ -2,33 +2,34 @@ package ua.epam.spring.hometask.dao.impl;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.aeonbits.owner.ConfigFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.dao.AuditoriumDao;
 import ua.epam.spring.hometask.domain.Auditorium;
+import ua.epam.spring.hometask.utils.DbQueryResource;
 
+import java.util.HashSet;
 import java.util.Set;
 
+@Component
 @Setter @Getter
 public class AuditoriumDaoImpl implements AuditoriumDao {
+
+	private DbQueryResource dbQueryResource = ConfigFactory.create(DbQueryResource.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private Set<Auditorium> auditoriums;
-
 	@Override
 	public Set<Auditorium> getAll() {
-		return auditoriums;
+		return new HashSet<>(jdbcTemplate.query(dbQueryResource.auditoriumsGetAll(), new BeanPropertyRowMapper<>(Auditorium.class)));
 	}
 
 	@Override
 	public Auditorium getByName(String name) {
-		for (Auditorium auditorium : auditoriums) {
-			if (name.equals(auditorium.getName())) {
-				return auditorium;
-			}
-		}
-		return null;
+		return jdbcTemplate.queryForObject(dbQueryResource.auditoriumsGetByName(), new Object[]{name}, new BeanPropertyRowMapper<>(Auditorium.class));
 	}
 }

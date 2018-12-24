@@ -28,7 +28,6 @@ public class App implements ApplicationListener {
     private static final String USER_EMAIL = "admin@epam.com";
     private static final String EVENT_NAME = "Rambo";
     private static final String AUDITORIUM1_NAME = "Auditorium1";
-    private static final String AUDITORIUM2_NAME = "Auditorium2";
     private static final String AIR_DATE_EVENT = "2016-10-08T00:00";
 
     @Autowired
@@ -50,9 +49,8 @@ public class App implements ApplicationListener {
         Event event = app.eventService.getByName(EVENT_NAME);
         LocalDateTime airDate = LocalDateTime.parse(AIR_DATE_EVENT);
         Auditorium auditorium1 = app.auditoriumService.getByName(AUDITORIUM1_NAME);
-        Auditorium auditorium2 = app.auditoriumService.getByName(AUDITORIUM2_NAME);
         event.addAirDateTime(airDate, auditorium1);
-        event.addAirDateTime(airDate.plusDays(1), auditorium2);
+        event.addAirDateTime(airDate.plusDays(1), auditorium1);
 
         User user = app.userService.getUserByEmail(USER_EMAIL);
 

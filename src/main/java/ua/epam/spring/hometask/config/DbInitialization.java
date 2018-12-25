@@ -31,6 +31,8 @@ class DbInitialization {
             connection = Objects.requireNonNull(datasource).getConnection();
             ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/users_table.sql"), StandardCharsets.UTF_8));
             ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/auditoriums_table.sql"), StandardCharsets.UTF_8));
+            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/events_table.sql"), StandardCharsets.UTF_8));
+            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/tickets_table.sql"), StandardCharsets.UTF_8));
         } catch (SQLException e) {
             log.error(e);
         } finally {
@@ -49,8 +51,21 @@ class DbInitialization {
         Connection connection = null;
         try {
             connection = Objects.requireNonNull(datasource).getConnection();
-            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/users_data.sql"), StandardCharsets.UTF_8));
-            ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/auditoriums_data.sql"), StandardCharsets.UTF_8));
+            try {
+                ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/users_data.sql"), StandardCharsets.UTF_8));
+            } catch (ScriptStatementFailedException e) {
+                log.debug(e);
+            }
+            try {
+                ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/auditoriums_data.sql"), StandardCharsets.UTF_8));
+            } catch (ScriptStatementFailedException e) {
+                log.debug(e);
+            }
+            try {
+                ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource("sql/events_data.sql"), StandardCharsets.UTF_8));
+            } catch (ScriptStatementFailedException e) {
+                log.debug(e);
+            }
         } catch (SQLException | ScriptStatementFailedException e) {
             log.error(e);
         } finally {

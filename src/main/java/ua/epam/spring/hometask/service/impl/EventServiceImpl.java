@@ -16,10 +16,7 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	public Event save(Event object) {
-		Event event;
-		event = eventDao.save(object);
-
-		return event;
+		return eventDao.save(object);
 	}
 
 	@Override

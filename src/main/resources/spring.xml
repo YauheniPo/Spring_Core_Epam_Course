@@ -11,11 +11,10 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-    <import resource="beans/events.xml"/>
     <import resource="beans/discounts.xml"/>
 
     <aop:aspectj-autoproxy/>
     <context:annotation-config/>
-    <context:component-scan base-package="ua.epam.spring.hometask"/>
-    <context:property-placeholder location="classpath:data/**/*.properties"/>
+    <!--<context:component-scan base-package="ua.epam.spring.hometask"/>-->
+    <!--<context:property-placeholder location="classpath:data/**/*.properties"/>-->
 </beans>

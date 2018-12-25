@@ -28,7 +28,7 @@ public class App implements ApplicationListener {
     private static final String USER_EMAIL = "admin@epam.com";
     private static final String EVENT_NAME = "Rambo";
     private static final String AUDITORIUM1_NAME = "Auditorium1";
-    private static final String AIR_DATE_EVENT = "2016-10-08T00:00";
+    private static final String AIR_DATE_EVENT = "1990-09-14T17:00";
 
     @Autowired
     private BookingServiceImpl bookingService;
@@ -59,8 +59,15 @@ public class App implements ApplicationListener {
         Ticket ticket3 = new Ticket(user, event, event.getAirDates().last(), 1);
         Ticket ticket4 = new Ticket(user, event, event.getAirDates().last(), 2);
 
-        double ticketsPrice = app.bookingService.getTicketsPrice(event, event.getAirDates().first(),
+        double ticketsPrice = app.bookingService.getTicketsPrice(user, event, event.getAirDates().first(),
                 new HashSet<>(Arrays.asList(ticket1.getSeat(), ticket2.getSeat())));
+
+        app.bookingService.bookTickets(new HashSet<Ticket>(){{
+            add(ticket1);
+            add(ticket2);
+            add(ticket3);
+            add(ticket4);
+        }});
 
         user.addTicket(ticket1, ticket2, ticket3, ticket4);
     }

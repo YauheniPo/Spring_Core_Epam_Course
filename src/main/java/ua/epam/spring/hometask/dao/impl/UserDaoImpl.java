@@ -22,22 +22,17 @@ import java.util.Collection;
 @Component
 public class UserDaoImpl implements UserDao {
 
-    private UserQueryResource dbQueryResource = ConfigFactory.create(UserQueryResource.class);
+    private UserQueryResource userQueryResource = ConfigFactory.create(UserQueryResource.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Override
-    public User getUserByEmail(String email) {
-        return jdbcTemplate.queryForObject(dbQueryResource.usersGetByEmail(), new Object[]{email}, new BeanPropertyRowMapper<>(User.class));
-    }
 
     @Override
     public User save(User user) {
         KeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             final PreparedStatement ps = connection.prepareStatement(
-                    dbQueryResource.usersSave(), Statement.RETURN_GENERATED_KEYS);
+                    userQueryResource.usersSave(), Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getEmail());
@@ -50,16 +45,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void remove(User user) {
-        jdbcTemplate.update(dbQueryResource.usersDelete(), user.getId());
+        jdbcTemplate.update(userQueryResource.usersDelete(), user.getId());
     }
 
     @Override
     public User getById(Long id) {
-        return jdbcTemplate.queryForObject(dbQueryResource.usersGetById(), new Object[]{id}, new BeanPropertyRowMapper<>(User.class));
+        return jdbcTemplate.queryForObject(userQueryResource.usersGetById(), new Object[]{id}, new BeanPropertyRowMapper<>(User.class));
     }
 
     @Override
     public Collection<User> getAll() {
-        return jdbcTemplate.query(dbQueryResource.usersGetAll(), new BeanPropertyRowMapper<>(User.class));
+        return jdbcTemplate.query(userQueryResource.usersGetAll(), new BeanPropertyRowMapper<>(User.class));
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return jdbcTemplate.queryForObject(userQueryResource.usersGetByEmail(), new Object[]{email}, new BeanPropertyRowMapper<>(User.class));
     }
 }

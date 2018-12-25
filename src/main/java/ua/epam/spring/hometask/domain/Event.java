@@ -11,6 +11,7 @@ import java.util.*;
 @NoArgsConstructor
 public class Event extends DomainObject {
 
+    private Long id;
     @NonNull private String name;
     @NonNull private double basePrice;
     @NonNull private EventRating rating;

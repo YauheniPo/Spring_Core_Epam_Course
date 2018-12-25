@@ -12,7 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
-import ua.epam.spring.hometask.utils.DbQueryResource;
+import ua.epam.spring.hometask.dao.query.UserQueryResource;
 
 import java.sql.*;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import java.util.Collection;
 @Component
 public class UserDaoImpl implements UserDao {
 
-    private DbQueryResource dbQueryResource = ConfigFactory.create(DbQueryResource.class);
+    private UserQueryResource dbQueryResource = ConfigFactory.create(UserQueryResource.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

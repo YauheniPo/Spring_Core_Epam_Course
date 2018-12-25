@@ -2,7 +2,6 @@ package ua.epam.spring.hometask.domain;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,9 +13,10 @@ import java.util.stream.LongStream;
 @AllArgsConstructor
 public class Auditorium {
 
+    private Long id;
     private String name;
     private long numberOfSeats;
-    private Set<Long> vipSeats;
+    private Set<Integer> vipSeats;
 
     /**
      * Counts how many vip seats are there in supplied <code>seats</code>
